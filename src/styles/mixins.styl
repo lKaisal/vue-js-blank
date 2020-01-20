@@ -1,0 +1,30 @@
+@import './variables'
+
+debug()
+  background-color rgba(red, .33) !important
+
+outline()
+  outline 3px solid rgba(red, .33) !important
+
+ghost()
+  content ''
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+
+transition($property = transform\, opacity)
+  transition: $property $tDurationDeafault $tTimingFunctionDefault;
+
+hover()
+  &:hover
+    html.desktop &
+      {block}
+
+hoverStyle()
+  opacity .75
+
+jsVoaStart()
+  opacity 0
+  transform translateY(30px)

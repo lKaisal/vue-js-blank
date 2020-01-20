@@ -1,0 +1,44 @@
+@import './tools'
+
+[v-cloak]
+  display none !important
+
+html
+body
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+  color black
+  -webkit-tap-highlight-color rgba($cOrange, .25)
+
+::selection
+  background-color $cOrange
+  color white
+
+a
+  padding 5px
+  margin -5px
+  color inherit
+  text-decoration none
+  transition()
+  +hover()
+    hoverStyle()
+
+#__nuxt
+#__layout
+.app
+  // min-height 100vh
+  height 100%
+
+.page
+  transition()
+  transition-duration $tSlow
+  &.v-enter
+  &.v-leave-to
+    opacity 0
+
+.container
+  grid-container()
+  max-width none
+
+.is-hidden
+  display none

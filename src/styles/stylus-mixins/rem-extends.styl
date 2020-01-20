@@ -1,0 +1,29 @@
+
+em($v, $delimeter = 16)
+  return 1em * $v / ($delimeter)
+
+rem($v, $delimeter = 16)
+  return 1rem * $v / ($delimeter)
+
+vh($v)
+  return $v / (1080/75) * 1em
+
+strip-units($v)
+  return 1 * $v
+
+imgboxrem($image, $baseFontSize = 16)
+  width : rem(strip-units(image-size($image)[0]), $baseFontSize)
+  height : rem(strip-units(image-size($image)[1]), $baseFontSize)
+  background-position : center
+  background-repeat : no-repeat
+  background-image-retina($image)
+  background-size : contain
+
+
+imgboxem($image, $baseFontSize = 16)
+  width : em(strip-units(image-size($image)[0]), $baseFontSize)
+  height : em(strip-units(image-size($image)[1]), $baseFontSize)
+  background-position : center
+  background-repeat : no-repeat
+  background-image-retina($image)
+  background-size : contain
