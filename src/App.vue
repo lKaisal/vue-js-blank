@@ -25,9 +25,6 @@ export default class App extends Vue {
   async created() {
     if (!this.list || !this.list.length) await Store.dispatch('getList')
   }
-  async mounted() {
-    if (!this.list || !this.list.length) await Store.dispatch('getList')
-  }
 }
 </script>
 

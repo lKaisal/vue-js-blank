@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex, { Store } from 'vuex'
+import Vuex from 'vuex'
 import { AxiosResponse } from 'axios'
 import { Banner, BannersState } from '../models'
 import service from '../client'
@@ -10,6 +10,11 @@ Vue.use(Vuex as any)
 const store: StoreOptions<BannersState> = {
   state: {
     list: [],
+    createBanner: {
+      isLoading: false,
+      success: false,
+      error: ''
+    }
   },
 
   getters: {
@@ -39,6 +44,17 @@ const store: StoreOptions<BannersState> = {
             commit('saveList', res)
             resolve()
           })
+          .catch(error => console.log(error.response))
+      })
+    },
+    async createBanner(state, formData) {
+      return new Promise((resolve) => {
+        service.post('api/v1/banner-create', formData, {headers: { 'Content-Type': 'multipart/form-data'}})
+          .then((res: AxiosResponse<any>) => {
+            console.log(res)
+            resolve()
+          })
+          .catch(error => console.log(error.response))
       })
     }
   }

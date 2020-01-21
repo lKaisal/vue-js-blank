@@ -5,11 +5,11 @@
     +e.FORM.body
       +e.row
         +e.img-drop
-          +e.drop(v-show="!uploadedImg && !imgSrc" ref="fileform" @drop.prevent="saveImg" @dragover.prevent)
+          +e.drop(v-show="!uploadedImg && !imgUrl" ref="fileform" @drop.prevent="saveImg" @dragover.prevent)
             i(class="el-icon-plus form-create__drop-plus")
           +e.INPUT.input-img(type="file" @input="onInputImg")
           +e.img(v-if="uploadedImg" @mouseenter.self="dropDeleteIsShown=true" @mouseleave="dropDeleteIsShown=false")
-            IMG(:src="imgSrc" :class="{ 'is-faded': dropDeleteIsShown }" class="form-create__img-preview")
+            IMG(:src="imgUrl" :class="{ 'is-faded': dropDeleteIsShown }" class="form-create__img-preview")
             i(v-show="dropDeleteIsShown" @click="removeImg" class="el-icon-delete-solid form-create__drop-delete")
       +e.row
         +e.LABEL.label(for="newsId") Id новости
@@ -25,7 +25,7 @@
         +e.EL-SELECT.select(ref="select" v-model="sortBy" :placeholder="(maxSortBy + 1).toString()")
           +e.EL-OPTION(v-for="n in maxSortBy + 1" :key="n" :label="n" :value="n")
       +e.row
-        +e.EL-BUTTON(type="primary") Сохранить баннер
+        +e.EL-BUTTON(type="primary" @click="submitForm") Сохранить баннер
         +e.EL-BUTTON(type="danger") Отменить
 </template>
 
@@ -44,14 +44,23 @@ export default class FormCreate extends Vue {
   pageType: string = ''
   isActive: boolean = true
   sortBy: number = 1
-  imgUrl: string = ''
-  attachments: string[] = []
   uploadedImg: any = ''
-  imgSrc: string | ArrayBuffer | null = ''
+  imgUrl: string | ArrayBuffer | null = ''
   dropDeleteIsShown: boolean = false
 
   get list() { return Store.getters.listSorted }
   get maxSortBy() { return this.list.length }
+
+  submitForm() {
+    const formData = new FormData()
+    formData.append('file', this.uploadedImg)
+    formData.append('isActive', this.isActive.toString())
+    formData.append('newsId', this.newsId)
+    formData.append('pageType', this.pageType)
+    formData.append('sort', this.sortBy.toString())
+
+    Store.dispatch('createBanner', formData)
+  }
 
   saveImg(evt: any) {
     this.uploadedImg = evt.dataTransfer.files[0]
@@ -66,13 +75,13 @@ export default class FormCreate extends Vue {
   getImagePreviews(){
     let reader = new FileReader();
 
-    reader.addEventListener('load', () => this.imgSrc = reader.result, false);
+    reader.addEventListener('load', () => this.imgUrl = reader.result, false);
     reader.readAsDataURL(this.uploadedImg);
   }
 
   removeImg() {
     this.uploadedImg = null
-    this.imgSrc = null
+    this.imgUrl = null
   }
 }
 </script>

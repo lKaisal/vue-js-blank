@@ -10,8 +10,16 @@ declare type Banner = {
   isActive: boolean,
   pageType: string
 }
+
+declare type CreateBanner = {
+  isLoading: Boolean,
+  success: Boolean,
+  error: String
+}
+
 interface BannersState {
-  list: Banner[]
+  list: Banner[],
+  createBanner: CreateBanner
 }
 
 export { Banner, BannersState }
