@@ -11,7 +11,7 @@
 import { Vue, Component } from '../node_modules/vue-property-decorator/lib/vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from '../node_modules/vuex-class/lib/index'
 import ListBanners from './components/ListBanners.vue'
-import Store from './services/store'
+import Store from './store/index'
 
 @Component({
   components: {
@@ -20,7 +20,7 @@ import Store from './services/store'
 })
 
 export default class App extends Vue {
-  get list() { return Store.getters.listSortedAndCleared }
+  get list() { return Store.getters.listSorted }
 
   async created() {
     if (!this.list || !this.list.length) await Store.dispatch('getList')

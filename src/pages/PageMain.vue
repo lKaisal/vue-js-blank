@@ -10,7 +10,7 @@
 <script lang="ts">
 import { Vue, Component } from '../../node_modules/vue-property-decorator/lib/vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from '../../node_modules/vuex-class/lib/index'
-import Store from '../services/store'
+import Store from '../store/index'
 import ListBanners from '../components/ListBanners.vue'
 
 @Component({
@@ -19,8 +19,8 @@ import ListBanners from '../components/ListBanners.vue'
   }
 })
 
-export default class App extends Vue {
-  get list() { return Store.getters.listSortedAndCleared }
+export default class PageMain extends Vue {
+  get list() { return Store.getters.listSorted }
 
   onClick() { this.$router.push({ path: '/create' }) }
 }

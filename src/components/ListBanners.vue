@@ -11,7 +11,7 @@ import { Vue, Component } from '../../node_modules/vue-property-decorator/lib/vu
 import { Banner } from '../models'
 import { State, Getter, Action, Mutation, namespace } from '../../node_modules/vuex-class/lib/index'
 import ItemBanner from './ItemBanner.vue'
-import Store from '../services/store'
+import Store from '../store/index'
 
 @Component({
   components: {
@@ -20,8 +20,8 @@ import Store from '../services/store'
 })
 
 export default class ListBanners extends Vue {
-  // @Getter('listSortedAndCleared') list! : Banner[]
-  get list() { return Store.getters.listSortedAndCleared }
+  // @Getter('listSorted') list! : Banner[]
+  get list() { return Store.getters.listSorted }
 }
 </script>
 

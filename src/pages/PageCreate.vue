@@ -2,22 +2,23 @@
   include ../tools/bemto.pug
 
   +b.page-create
-    +e.title.H1 Создание баннера
-    +e.container
+    +e.H1.title.page-title Создание баннера
+    FormCreate(class="page-create__form")
 </template>
 
 <script lang="ts">
 import { Vue, Component } from '../../node_modules/vue-property-decorator/lib/vue-property-decorator'
 import { State, Getter, Action, Mutation, namespace } from '../../node_modules/vuex-class/lib/index'
-import Store from '../services/store'
+import Store from '../store/index'
+import FormCreate from '../components/FormCreate.vue'
 
 @Component({
   components: {
+    FormCreate
   }
 })
 
-export default class App extends Vue {
-  get list() { return Store.getters.listSortedAndCleared }
+export default class PageCreate extends Vue {
 }
 </script>
 
@@ -26,8 +27,6 @@ export default class App extends Vue {
 
 .page-create
 
-  &__container
-    debug()
-    width 100%
-    height 100px
+  &__form
+    grid-size(4, 4, 4, 4, 6)
 </style>

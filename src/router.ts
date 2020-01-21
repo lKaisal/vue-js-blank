@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import PageMain from '../pages/PageMain.vue'
-import PageCreate from '../pages/PageCreate.vue'
+import PageMain from './pages/PageMain.vue'
+import PageCreate from './pages/PageCreate.vue'
 
 Vue.use(VueRouter)
 

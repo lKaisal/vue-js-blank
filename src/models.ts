@@ -1,3 +1,6 @@
+import { StoreOptions } from 'vuex'
+
+
 declare type Banner = {
   id: number,
   createdAt: string,
@@ -7,6 +10,8 @@ declare type Banner = {
   isActive: boolean,
   pageType: string
 }
+interface BannersState {
+  list: Banner[]
+}
 
-
-export { Banner }
+export { Banner, BannersState }

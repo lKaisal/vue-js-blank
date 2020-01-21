@@ -1,24 +1,19 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 import { AxiosResponse } from 'axios'
-import { Banner } from '../models'
+import { Banner, BannersState } from '../models'
 import service from '../client'
+import { StoreOptions } from 'vuex'
 
 Vue.use(Vuex as any)
 
-interface BannersState {
-  list: Banner[]
-}
-
-export default new Vuex.Store<BannersState>({
+const store: StoreOptions<BannersState> = {
   state: {
     list: [],
   },
 
   getters: {
-    listSortedAndCleared(state: BannersState) {
-      // const cleared = state.list && state.list.filter(banner => banner.isActive)
-
+    listSorted(state: BannersState) {
       return state.list && state.list.sort((a, b) => {
         const keyA = a.sort
         const keyB = a.sort
@@ -47,4 +42,6 @@ export default new Vuex.Store<BannersState>({
       })
     }
   }
-})
+}
+
+export default new Vuex.Store<BannersState>(store);
