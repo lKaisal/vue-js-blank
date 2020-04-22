@@ -1,1 +1,0 @@
-src/modules/banners/ModuleBanners.vue

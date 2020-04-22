@@ -1,0 +1,5 @@
+type RootState = {
+
+}
+
+export { RootState }
